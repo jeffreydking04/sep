@@ -1,0 +1,81 @@
+Three primitive algorithms:
+
+A. Making a bowl of cereal:
+
+  1. Walk into kitchen.
+  2. Open cupboard with bowls.
+  3. If bowl, get bowl.
+  4. Close cupboard
+  5. If !bowl open dishwasher.
+      a. If dishes are clean and bowl exists, get bowl.
+      b. Else if dishes are clean, but !bowl
+          1) close dishwasher
+          2) look in sink for bowl to wash
+          3) if !bowl, children must have them scattered around the house
+            a) Find children
+            b) Count to 10
+            c) Find dirty bowl somewhere in house
+          4) Wash bowl.
+  6. Open cereal cupboard
+  7. Get cereal (assuming it is there, similar sub routine to !bowl if !cereal; I will not elaborate)
+  8. Open cereal box
+  9. Pour cereal into clean bowl
+  10. Close cereal box (amiright)
+  11. Put cereal back in cupboard
+  12. Close cupboard
+  13. Open refrigerator
+  14. Get milk if milk
+  15. Open milk
+  16. Pour milk into bowl with cereal
+  17. Close milk.
+  18. Put milk back into still open refrigerator
+  19. Close refrigerator
+  20. Open silverware drawer
+  21. Get spoon if spoon (see !bowl if !spoon)
+  22. Put spoon in bowl with ceral and milk
+
+B. Going for a run
+  
+  1. Open running shorts drawer
+  2. Get running shorts if running shorts (slight variations on !bowl if !shorts)
+  3. Put on running shorts (assuming nude)
+  4. If degrees < 90
+     a) Open closet
+     b) Get tshirt
+     c) Put on tshirt
+     d) If degrees < 40
+        1) Get sweatshirt
+        2) Put on sweatshirt
+  5. Walk down stairs
+  6. Open shoe closet
+  7. Get shoes
+  8. Put on shoes
+  9. Open door
+  10. Walk outside
+  11. Close door
+  12. Put one foot in front of other, making sure to lose contact with ground on each stride
+  13. Repeat until done
+  14. Open door
+  15. Walk inside
+  16. Close door
+  17. Lie on floor, gasping
+
+
+C. Brush teeth
+
+  1. Walk into bathroom
+  2. Get toothbrush from holder
+  3. Get toothpaste from counter
+  4. Unsrew toothpaste cap
+  5. Put small amount of toothpaste on toothbrush
+  6. Replace cap
+  7. Put toothpaste on counter
+  8. Run water over toothbrush (after turning on water; turn off after)
+  9. Scrub teeth and tongue with toothbrush
+  10. Spit out toothpaster into sink
+  11. Rinse toothbrush with water (see above note on water)
+  12. Repeat scrub
+  13. Repeat spit
+  14. Repeat rinse
+  15. Put toothbrush away
+  16. You are not reading this, are you?
