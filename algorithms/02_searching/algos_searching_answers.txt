@@ -1,0 +1,35 @@
+First part:
+
+1. It would take 7 iterations to find G with linear search.
+
+2. It would take 3 iterations to find G with binary search.
+
+3. 0,1,1,2,3,5,8,13,21,34,55,89,144
+
+  fib(10) = 55
+  fib(11) = 89
+  fib(12) = 144
+
+fib(20) benchmarks:
+
+Recursive:
+  0.000000   0.000000   0.000000 (  0.001610)
+Iterative:
+  0.000000   0.000000   0.000000 (  0.000006)
+
+Recursion is much slower.
+
+Second part:
+
+1. With any unsorted collection, you must use linear search.  No reason to use a recursive solution.
+
+2. With any sorted data, it is faster to run a binary search in general.  I would use an iterative solution to eliminate method calls.  I am guessing this would be faster.  I guess I should implement them both and find out.
+
+Creating an array of 10_000_000, then searching for every item:
+
+Iterative:
+ 18.050000   0.000000  18.050000 ( 18.051436)
+Recursive:
+ 27.940000   0.000000  27.940000 ( 27.944079)
+
+Iterative is roughly 35% faster.
