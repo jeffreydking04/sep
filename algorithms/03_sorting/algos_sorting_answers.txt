@@ -1,0 +1,69 @@
+I wrote quick, heap, and bucket sorts.  
+
+I then tested those 3 plus the 4 given in the checkpoint, insertion, selection, bubble, and merge.
+
+I created 100 arrays with elements 1..5000, then shuffled.  I made copies of the shuffled array so that each sort mechanism sorted the same set of arrays.  I tried to do this with larger arrays, but somewhere in the 9500 element range, merge sort starts giving stack errors.
+
+So the stack errors, in combination with the fact that the first part of merge sort is committed to dividing the given array into single units and calling the merge function recursively.  But since an array is already a collection of single elements, I got the idea that the first step would not be necessary and that an iterative method could be used to eliminate the stack problems.  So I wrote that method as well.  In 5000 element arrays, my method showed a nearly 18% improvement.
+
+Writing the bucket sort also got me to thinking about insertion sort, because one of the oprimazitions of bucket sort is to first sort into buckets, then call insertion, which is very fast on small sets, on the buckets.  I chose to implement a recursive bucket sort call and it is very fast.  I did not implement a combination bucket/insertion sort to compare.
+
+I was confused as to why quick sort was O(n log n) on average, when at each step, it still has to iterate over nearly n items.  As n grows large, I could not figure out why it did not slow quick sort down, but then I realized that, in a balanced set, there should only be log n iterations.  This still boggles my mind.
+
+When I realized that, I realized why heap sort worked as fast as it did as well.  In the original heapify, there are at most n elements that have to sift down, but each element has to swap at most log n times.  And on sort, each n item has to sift down at most log n swaps, so the worst case is 2n log n, which is O(n log n).
+
+Once I started to understand the structures behind the O() of each sort, I realized that insertion sort could be much faster if we used a binary insertion, so I implemented it and it is fast, though Ruby's insertion techniques greatly speed it up.  I understand why it would be O(n^2) in worst case (the swaps on insertion), so it really negates the whole point, though inserting to a binary search tree might be very fast for large data sets.  Maybe not, what do I know?
+
+
+5000 element arrays
+ruby_sort: 0.00082 seconds
+Bucket(bucket range 100): 0.00499 seconds
+jdk_insertion: 0.01312 seconds
+Bucket(with bucket range of 5): 0.01336 seconds
+Heap: 0.01369 seconds
+Quick: 0.01523 seconds
+jdk_merge: 0.04694 seconds
+Merge: 0.05701 seconds
+Insertion: 0.35597 seconds
+Selection: 0.93289 seconds 
+Bubble: 2.52253 seconds
+
+50 element arrays (bucket using 100)
+Insertion: 6.56179097131826e-05
+Selection: 0.00015491861995542422
+Bubble: 0.0003052205007406883
+Merge: 0.00016789911038358695
+Quick: 8.415167016210035e-05
+Heap: 9.17450305132661e-05
+Bucket: 4.4609470205614346e-05
+jdk_merge: 0.00010295890038833022
+jdk_insertion: 6.441002027713693e-05
+ruby_sort: 6.126800726633519e-06
+
+5 element arrays (bucket using 100)
+Insertion: 3.1010595557745546e-06
+Selection: 3.964249917771667e-06
+Bubble: 3.922029573004693e-06
+Merge: 1.1434210609877482e-05
+Quick: 4.2854002094827595e-06
+Heap: 6.0847400163766e-06
+Bucket: 7.678809779463336e-06
+jdk_merge: 9.418059489689767e-06
+jdk_insertion: 4.572689649648965e-06
+ruby_sort: 1.2346601579338312e-06
+
+2 element arrays (bucket using 100)
+Insertion: 1.5449196507688613e-06
+Selection: 1.5160093607846647e-06
+Bubble: 1.1995004024356603e-06
+Merge: 2.6738402084447443e-06
+Quick: 1.498049678048119e-06
+Heap: 3.04595087072812e-06
+Bucket: 5.211359821259975e-06
+jdk_merge: 3.0629104003310204e-06
+jdk_insertion: 1.892389846034348e-06
+ruby_sort: 6.065607885830104e-07
+
+It can be seen that the performance advantages of the faster sort methods are gone in very small arrays.  I suspect this is because there is very little overhead associated with the primitive iterative methods.  In larger arrays, paying for the overhead to setup or implement the more sophisticated techniques is an investment that pays huge dividends.
+
+I just reran bucket sort with bigger buckets and got a huge improvement.  For well distributed data, bucket sort is really fast.  It can even be compared to ruby.sort!, which has the advantage of being able to run in C.  Bucket sort with 100 range buckets is easily the slowest.
