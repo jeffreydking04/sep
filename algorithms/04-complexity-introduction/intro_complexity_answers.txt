@@ -1,0 +1,65 @@
+1. An algorithm that is O(1) is the speed of light.
+   An algorithm that is O(2^n) is Tom Brady scrambling.
+
+2. Binary Search can potential find its target on the first search.
+
+3. The worst case scenario for Binary Search is then number of times a collection need to be divided in half before it the result is 1, plus 1.  Why the plus 1?  Example: a collection has 4 items, so division by 2 twice would result in 1.  But if the target item were the last item in the collection, then Binary Search would select item #2 first, discard it, then select item #3 next, discard it, before finally selecting the correct item, thus 3 searches.
+
+4. Any result that is between the above two cases is technically a bounded-case, but if we are referring to the average case scenario then it is the average of the above two cases, or (1 + the number of diivisons by 2 to produce 1 + another 1) / 2 or (log(n) + 2) / 2.
+
+5. The Data:
+
+0  1
+1 2
+2 4
+3 8
+4 16
+5 32
+6 64
+7 128
+8 256
+9 512
+10  1024
+
+
+The graph is in a spread sheet file.
+
+6. f(n) = 2^n
+
+7. O(2^n) or exponential time
+
+8. The script (in another file as well):
+
+def linear_search_worst_case_iterations(n)
+  puts "Collection size       Worst case iterations for Linear Search"
+  (1..n).each do |x|
+    puts "#{x}                     #{x}"
+  end
+end
+
+linear_search_worst_case_iterations(9)
+
+The result:
+
+Collection size       Worst case iterations for Linear Search
+1                     1
+2                     2
+3                     3
+4                     4
+5                     5
+6                     6
+7                     7
+8                     8
+9                     9
+
+Is this what was wanted, because that is how I read the question?
+
+9. The graph is in a spread sheet file.
+
+10. Binary Search has Big-O of log n.
+
+11. Binary Search has Big-Omega of 1.
+
+12. Binary Search has Big-Theta of (log n)/2 (this is an average, I believe).
+
+ 
