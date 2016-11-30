@@ -1,0 +1,68 @@
+1.  O(1) Constant Time
+
+    Regardless of input, this function has the same operating time. It executes each step exactly once.
+
+2.  O(n) Linear Time
+
+    This algorithm cycles through every item in a collection exactly once to determine largest value, so its number of execution steps increases in a one to one, or linear, relationship with the input size.
+
+3.  O(n) Linear Time
+
+    The input variable n in this algorithm is the total number of elements in the 2D array.  The algorithm checks each of these elements exactly once and returns the largest value, thus it is linear in relation to the total number of unique elements.
+
+    I guess you could argue that it is Quadratic in relation to the number of sub-collections, but ultimately this is a linear time algorithm with regard to the number of elements.
+
+4.  numbers(0) returns without a recursive call (1 iteration)
+    numbers(1) returns without a recursive call (1 iteration)
+    numbers(2) calls numbers(1) for 1 iteration and numbers(0) for 1 iteration in addition to itself (3)
+    numbers(3) calls numbers(2) (3) and numbers(1) (1) and 1 for itself (5)
+    numbers(4) calls numbers(3) (5) and numbers(2) (3) and 1 for istelf (9)
+    numbers(5) calls numbers 15 times
+    numbers(6) calls numbers 25 times
+    numbers(7) calls numbers 41 times
+    numbers(8) calls numbers 67 times
+    numbers(9) calls numbers 109 times
+    see file for more
+
+    So I added a count to see how many recursive calls this function would make.  As expected, the numbers match up with my calculations:
+
+    0: calls: 1
+    1: calls: 1
+    2: calls: 3
+    3: calls: 5
+    4: calls: 9
+    5: calls: 15
+    6: calls: 25
+    7: calls: 41
+    8: calls: 67
+    9: calls: 109
+    10: calls: 177
+    11: calls: 287
+    12: calls: 465
+    13: calls: 753
+    14: calls: 1219
+    15: calls: 1973
+    16: calls: 3193
+    17: calls: 5167
+    18: calls: 8361
+    19: calls: 13529
+    20: calls: 21891
+    21: calls: 35421
+    22: calls: 57313
+    23: calls: 92735
+    24: calls: 150049
+    25: calls: 242785
+
+    But, of course, even fairly low values of n will take a long time to calculate, so this must be at least exponential.  But is also easy to see that it is less than 2^n calls because each step does not double in size. I am not sure how to solve it but obviously Quadratic time is not an upper bound because it exceeds Quadratic time with input as low as 8 (which requires 67 > 64 recursive calls).  And it is clearly less than 2^n for all n, but so an upper bound is:
+
+    Exponential Time: O(2^n)
+
+    Doing a little research it appears that 1.62^n is an upper bound. Which is Exponential Time.
+
+5.  Linear Time: O(n)
+
+    Of course this is the iterative version of the Fibonacci sequence that runs through every number from 0 to n - 1 exactly once.
+
+6.  Quadratic Time: O(n^2)
+
+    This is quicksort.  (It might have taken me a second or two longer to figure it out if the code were not mistakenly recursively calling quicksort in the assignment, which of course causes an error.  But pivot gave it away in any case.)  Quicksort works similar to  merge sort except that it picks a pivot and sorts the array around the pivot element before dividing each side of the pivot into sub arrays and recursivel calling itself.  Each call takes has n searches and potential inserts.  If the pivot chosen is near the median of the elements, then quicksort will run very fast, because the array is divided in half each time, creating log n layers: Loglinear-O(n * log n), but in its worst case, it will always sort all elements to one side of the pivot and thus will have to go n layers deep, which gives it a worst case O(n^2).
