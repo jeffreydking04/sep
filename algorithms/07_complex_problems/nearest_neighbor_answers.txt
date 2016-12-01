@@ -1,0 +1,19 @@
+I am going to implement nearest neighbor by creating a hash of cities.  The city will be the key and an array containing x and y coordinates will be the value.
+
+I will make a copy of the provided cities_hash so as to leave it intact.
+
+I will cycle through the remaining cities in the copy, computing the distance from the current city to each unvisited city, keeping track of the min distance from current city. Then closest city will be deleted from the copy hash and its key will be pushed onto a path array.  While the copy has elements, the process is repeated.
+
+Analysis of proposed solution:
+
+Making a copy obviously happens in Linear Time with size n.
+
+But because we delete each city from the copy, there are diminishing numbers of cities to loop through with each iteration, giving n * (n+1)/2 instead of n^2.
+
+Deletion also means that the city does not need to be checked for visitation.  If it is still there, it has not been visited.
+
+The resulting path array is returned.
+
+Will it really be that easy?
+
+Not quite as I hoped, but done and done.
