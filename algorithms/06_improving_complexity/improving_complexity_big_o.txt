@@ -1,0 +1,65 @@
+I am going to treat this file basically as a blog of my experience with this poorly written ruby code.  I am somewhat trepidatious about the third part of this, improving space complexity, because I am not at all sure how using a different data structure will improve performance of the the method.
+
+Step 1:  I copy pasted the code into a file, created 1 array with elements 0 to 9 unique and shuffled them.  Then ran the 1 array through the poorly written ruby method to find that it is so poorly written it does not even work.
+
+[6, 1, 5, 3, 2, 4, 9, 0, 8, 7]
+becomes
+[0, 1, 2, 3, 4, 5, 6, 8, 9, 7]
+
+We are not even at the optimization stage yet.  So I am going to start with file improving_complexity_version_zero.rb to get the code working in the first place.
+
+The original code pops the last value off of the combined array to be sorted and seeds the new sorted array with that value. It then inserts everything correcly, unless the value happens to be greater than the first value inserted, which will always reside at the end of the sorted array, because the code was written to insert before the last value if the end of the sorted array were reached instead of pushing. I changed the insert to a push and single arrays are sorting fine.
+
+Now to test multiple arrays.
+
+Multiple arrays work fine.  On to improving_complexity_version_one.rb: code optimizations.
+
+First, let us run a benchmark with large arrays and small arrays to see how fast we are.
+
+  3 10  element arrays, well distributed, 100 times, average: 4.891076940111816e-05
+  3 1000  element arrays, well distributed, 100 times, average: 0.2145538755817688
+
+Let us optimize some code.
+
+I first took out the element by element push to combine the arrays given as arguments and instead concatenated the arrays together.  
+
+New benchmarks:
+
+  3 10  element arrays, well distributed, 100 times, average: 4.474712943192571e-05
+  3 1000  element arrays, well distributed, 100 times, average: 0.2143380251902272
+
+There is a very slight improvement, which is to be expected. It is most marked in smaller arrays because the initial overhead of combining the arrays is a larger part of the algorithm in smaller arrays.
+
+Next, I really do not like deleting the last element, then cycling through the rest.  Deletion seems like an unneccesary operation on the combined array.
+
+I seed the sorted_array with the first value of the combined_array, without deletion, then cycle through the rest of the combined array using an index instead of val in.  Both methods will retrieve exactly once each element from the combined array.  I initially
+
+I did not expect much improvement, if any, in the benchmarks, because the real overhead savings came from the concatenation of the argument arrays, but there was some improvement gained from using while loops as opposed to (for val in combined_array or (0..x).each) loops and in getting rid of the deletion.  It is greater than I expected, but since we are doing away with this sort method altogether in the next section,  it is moot, but I was surprised at the performance advantage gained when writing our while loops explicitly as opposed to using Ruby helper loops.
+
+We are working with pure insertion sort and thus we are dealing with Linear Time: O(n).
+
+New benchmarks:
+
+  3 10  element arrays, well distributed, 100 times, average: 4.362488922197372e-05
+  3 1000  element arrays, well distributed, 100 times, average: 0.18761880579957504
+
+We are a bit faster on average.
+
+Next is improving_complexity_version_two.rb: improving time complexity.
+
+I had a couple of ideas, such as sorting each argument array first using bucket or quicksort, then using a merge method to merge them, which might be fastest, but it would still be Loglinear: O(n * log n) and thus be a harder to read (and thus write and maintain) version with minimal overall performance advantages over simply using a quicksort, which will still have O(n^2) time complexity, but on average will run in Loglinear time, which should show a vast improvement.
+
+All I did was copy paste my quick_sort method and call it in place of the insertion sort code we had before.
+
+New benchmarks:
+
+  3 10  element arrays, well distributed, 100 times, average: 4.6080991451162847e-05
+  3 1000  element arrays, well distributed, 100 times, average: 0.008769535612373147
+
+As expected, insertion sort slightly outperforms quick sort for smaller arrays, but quick sort destroys insertion sort on larger arrays.  There is a 95% improvement in performance here, even though our Big-O is still the same.
+
+On to improving_complexity_version_three.rb: improving space complexity.
+
+As I said, I am not sure how we can really improve performance with a different data structure.  Hashes are not sorted, so they are out.  (Yes, Ruby has some methods for sorting hashes, but I do not think that is the point of this exercise.)  Binary search trees or binary heaps would require instantiating nodes in Linear Time, then insertion into the structure in Logaritmic Time, which would not be any improvement over the current method and the resulting structure would not be a sorted array, so using it as such would require reconverting the structure to array form.  I see no performance advantages in converting the arrays to these structures unless the array were so large that it consumed the cache, slowing down the system as a whole, in which case breaking it into a binary search tree would free up the cache, but ultimately make for slower sort performance.
+
+I am open to suggestions. 
